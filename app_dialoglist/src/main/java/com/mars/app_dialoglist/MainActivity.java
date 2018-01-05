@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //多選對話框
     public void click3 (View v)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -110,6 +113,44 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
+        public void click4(View v)
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("this is a title");
+            // LayoutInflater.from 來建立物件
+            LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+            //用inflater.inflate建立Viewiew,把先建好的layout1放到VIEW
+            View v1 = inflater.inflate(R.layout.layout1,null);
+            //放入v1
+            builder.setView(v1);
+            //重點是v1.findViewById 從v1這個view來找到id
+            final TextView tv = (TextView)v1.findViewById(R.id.textView) ;
+            Button  bt  = (Button) v1.findViewById(R.id.button4);
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tv.setText("HELLO world");
+                }
+            });
+
+            builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Toast.makeText(MainActivity.this, "按下了確定", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.show();
+
+
+        }
 
     }
 
