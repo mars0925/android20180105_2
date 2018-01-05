@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     int ch=-1;
     int tmp=-1 ;
+    boolean[] chks = new boolean[5];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +72,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
+
     }
 
-}
+    public void click3 (View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("多選列表");
+        final String fruits[] = {"蘋果", "香蕉", "梨子", "西瓜", "鳳梨"};
+        final TextView tv4 = (TextView) findViewById(R.id.textView4);
+        //chks是布林的陣列
+        builder.setMultiChoiceItems(fruits, chks, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+            }
+        });
+
+        builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int position) {
+                StringBuilder sb = new StringBuilder();//字串累加時要用到的物件
+                for (int i=0;i<=4;i++)
+                {
+                    if (chks[i])
+                    {
+                        sb.append(fruits[i] + ",");
+                    }
+                }
+                tv4.setText(sb.toString());//StringBuilder的結果要倒出來用toString()
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+    }
+
+    }
+
+
+
+
+
+
